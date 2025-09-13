@@ -1,79 +1,78 @@
-# Christy Cares - Appwrite Functions
+# Christy Cares - Email Function
 
-This repository contains all Appwrite Functions for the Christy Cares platform.
+This repository contains the Email Notification function for the Christy Cares platform.
 
-## 🚀 Functions
+## 🚀 Function: Email Notifications
 
-### 📧 Email Notifications (`email-notifications/`)
 Handles sending email notifications for appointments, messages, and system alerts.
 
 **Features:**
-- Email notifications for new appointments
-- Message notifications via email
-- System alerts and reminders
-- Test mode using Ethereal Email
-- Production mode with real SMTP providers
+- ✅ Email notifications for new appointments
+- ✅ Message notifications via email
+- ✅ System alerts and reminders
+- ✅ Test mode using Ethereal Email
+- ✅ Professional HTML templates with Christy Cares branding
+- ✅ Ready for production SMTP providers
 
-### 📱 SMS Notifications (`sms-notifications/`) [Coming Soon]
-Handles SMS notifications using Twilio or other providers.
-
-### 🔔 Push Notifications (`push-notifications/`) [Coming Soon]
-Handles push notifications for mobile apps.
-
-## 🛠️ Development Setup
-
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd christy-cares-functions
-   ```
-
-2. **Install dependencies for each function:**
-   ```bash
-   cd email-notifications
-   npm install
-   ```
-
-3. **Deploy to Appwrite:**
-   - Go to your Appwrite Console
-   - Create a new function
-   - Upload the function folder
-   - Configure environment variables
-
-## 📁 Structure
+## 📁 Repository Structure
 
 ```
 christy-cares-functions/
-├── email-notifications/
-│   ├── index.js
-│   ├── package.json
-│   └── README.md
-├── sms-notifications/
-│   ├── index.js
-│   ├── package.json
-│   └── README.md
-└── push-notifications/
-    ├── index.js
-    ├── package.json
-    └── README.md
+├── index.js          # Main function code (entry point)
+├── package.json      # Dependencies
+├── README.md         # This file
+└── email-notifications/  # Original development files
 ```
 
-## 🔧 Environment Variables
+## 🚀 Deploy to Appwrite
 
-Each function may require specific environment variables. Check individual function READMEs for details.
+### Method 1: GitHub Integration (Recommended)
 
-## 📚 Documentation
+1. **Connect GitHub to Appwrite:**
+   - Go to your function: https://cloud.appwrite.io/console/project-christy-cares-app/functions/68c5c9dc0036c5a66172
+   - Click "Deploy" tab
+   - Select "Git" deployment
+   - Connect to GitHub: `zrottmann/christy-cares-functions`
+   - Branch: `master`
+   - Root Directory: `/` (repository root)
+   - Entrypoint: `index.js`
 
-- [Appwrite Functions Documentation](https://appwrite.io/docs/functions)
-- [Christy Cares Platform Repository](../caregiver_platform)
+2. **Auto-deploy:**
+   - Pushes to `master` branch will auto-deploy
+   - Check deployment logs in Appwrite Console
 
-## 🤝 Contributing
+### Method 2: Manual Upload
 
-1. Create a feature branch
-2. Make your changes
-3. Test the function locally
-4. Submit a pull request
+1. Upload `index.js` and `package.json` directly to Appwrite Console
 
-## 📄 License
+## 🧪 Test Function
 
-MIT License - see LICENSE file for details.
+Use this payload:
+```json
+{
+  "to": "test@example.com",
+  "subject": "Test Email from Christy Cares",
+  "content": "Hello!\n\nThis is a test email from your deployed function."
+}
+```
+
+Expected response:
+```json
+{
+  "success": true,
+  "messageId": "unique-id",
+  "previewUrl": "https://ethereal.email/message/xxx"
+}
+```
+
+## ⚙️ Function Settings
+
+- **Runtime**: Node.js 18.0
+- **Entrypoint**: `index.js`
+- **Execute**: `users`
+- **Timeout**: 30 seconds
+
+## 🔗 Links
+
+- **Main App Repository**: https://github.com/zrottmann/caregiver
+- **Function Console**: https://cloud.appwrite.io/console/project-christy-cares-app/functions/68c5c9dc0036c5a66172
