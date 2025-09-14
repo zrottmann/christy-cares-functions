@@ -27,20 +27,28 @@ async function setupMessagesCollection() {
       collection = await databases.getCollection(DATABASE_ID, MESSAGES_COLLECTION_ID);
       console.log('Collection already exists:', collection.name);
     } catch (error) {
-      // Collection doesn't exist, create it
-      console.log('Creating messages collection...');
-      collection = await databases.createCollection(
-        DATABASE_ID,
-        MESSAGES_COLLECTION_ID,
-        'Messages',
-        [
-          sdk.Permission.read(sdk.Role.any()),
-          sdk.Permission.create(sdk.Role.users()),
-          sdk.Permission.update(sdk.Role.users()),
-          sdk.Permission.delete(sdk.Role.users())
-        ]
-      );
-      console.log('Collection created successfully');
+      if (error.code === 404) {
+        // Collection doesn't exist, create it
+        console.log('Creating messages collection...');
+        try {
+          collection = await databases.createCollection(
+            DATABASE_ID,
+            MESSAGES_COLLECTION_ID,
+            'Messages',
+            [
+              sdk.Permission.read(sdk.Role.any()),
+              sdk.Permission.create(sdk.Role.users()),
+              sdk.Permission.update(sdk.Role.users()),
+              sdk.Permission.delete(sdk.Role.users())
+            ]
+          );
+          console.log('Collection created successfully');
+        } catch (createError) {
+          console.log('Collection might already exist, continuing with attribute setup...');
+        }
+      } else {
+        console.log('Error checking collection:', error.message);
+      }
     }
 
     // Define all required attributes
