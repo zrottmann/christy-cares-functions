@@ -31,19 +31,23 @@ async function updateCollectionPermissions() {
     try {
       console.log(`Updating permissions for: ${collectionId}`);
 
+      // Get current collection to preserve its name
+      const collection = await databases.getCollection(DATABASE_ID, collectionId);
+
       // Update collection with proper permissions
-      await databases.updateCollection(
-        DATABASE_ID,
-        collectionId,
-        collectionId, // Keep the same name
-        [
+      await databases.updateCollection({
+        databaseId: DATABASE_ID,
+        collectionId: collectionId,
+        name: collection.name,
+        permissions: [
           sdk.Permission.read(sdk.Role.any()),     // Anyone can read
           sdk.Permission.create(sdk.Role.users()), // Any logged-in user can create
           sdk.Permission.update(sdk.Role.users()), // Any logged-in user can update
           sdk.Permission.delete(sdk.Role.users()), // Any logged-in user can delete
         ],
-        true // documentSecurity enabled
-      );
+        documentSecurity: true,
+        enabled: true
+      });
 
       console.log(`✅ Updated permissions for ${collectionId}`);
 
