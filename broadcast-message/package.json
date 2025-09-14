@@ -1,0 +1,9 @@
+{
+  "name": "broadcast-message-function",
+  "version": "1.0.0",
+  "description": "Broadcast message function for Christy Cares platform",
+  "main": "index.js",
+  "dependencies": {
+    "node-appwrite": "^11.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "setup-collections",
+  "version": "1.0.0",
+  "description": "Setup Appwrite collections for Christy Cares",
+  "scripts": {
+    "setup": "node setup-messages-collection.js"
+  },
+  "dependencies": {
+    "node-appwrite": "^11.0.0"
+  }
+}
